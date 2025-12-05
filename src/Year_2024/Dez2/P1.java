@@ -1,4 +1,4 @@
-package Dez2;
+package Year_2024.Dez2;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

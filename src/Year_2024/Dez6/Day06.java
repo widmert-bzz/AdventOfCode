@@ -1,4 +1,4 @@
-package Dez6;
+package Year_2024.Dez6;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -57,7 +57,7 @@ public class Day06 {
     }
 
     public static void main(String[] args) throws Exception {
-        char[][] map = readMap(Path.of("/Users/gd860/IdeaProjects/AoC24/src/Dez6/P1.txt"));
+        char[][] map = readMap(Path.of("/Users/gd860/IdeaProjects/AoC24/src/Year_2024.Dez6/P1.txt"));
 
         // -- Part 1
         char[][] p1 = copy(map);

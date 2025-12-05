@@ -1,4 +1,4 @@
-package Dez6
+package Year_2024.Dez6
 
 import java.io.BufferedReader
 import java.io.File
@@ -16,7 +16,7 @@ private var dir = 0;
 
 @Throws(IOException::class)
 private fun readFile() {
-    val file = File("/Users/gd860/IdeaProjects/AoC24/src/Dez6/P1.txt")
+    val file = File("/Users/gd860/IdeaProjects/AoC24/src/Year_2024.Dez6/P1.txt")
     BufferedReader(FileReader(file)).use { reader ->
         var line: String?
         while (reader.readLine().also { line = it } != null) {

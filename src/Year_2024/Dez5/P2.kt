@@ -1,4 +1,4 @@
-package Dez5
+package Year_2024.Dez5
 
 import java.io.BufferedReader
 import java.io.File
@@ -19,7 +19,7 @@ private fun main() {
 }
 
 private fun readFile(): Boolean {
-    val file = File("/Users/gd860/IdeaProjects/AoC24/src/Dez5/P1.txt")
+    val file = File("/Users/gd860/IdeaProjects/AoC24/src/Year_2024.Dez5/P1.txt")
     if (!file.exists() || !file.canRead()) {
         println("File does not exist or cannot be read.")
         return false

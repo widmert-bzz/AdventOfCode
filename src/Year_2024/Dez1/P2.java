@@ -1,20 +1,21 @@
-package Dez1;
+package Year_2024.Dez1;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class P1 {
+public class P2 {
 
     static ArrayList<Integer> left = new ArrayList<>();
     static ArrayList<Integer> right = new ArrayList<>();
+    static ArrayList<Integer> amountInRightList = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         readFile();
-        sort(left);
-        sort(right);
-        calc_distance(left, right);
+        countInRight();
+        calcSolution();
     }
 
     static void readFile() throws IOException {
@@ -36,28 +37,23 @@ public class P1 {
         }
     }
 
-    public static void sort(ArrayList<Integer> arr) {
-        for (int i = 0; i < arr.size(); i++) {
-            for (int j = 0; j < arr.size() - 1; j++) {
-                if (arr.get(j) > arr.get(j + 1)) {
-                    int temp = arr.get(j);
-                    arr.set(j, arr.get(j + 1));
-                    arr.set(j + 1, temp);
+    static void countInRight() {
+        for (int i = 0; i < left.size(); i++) {
+            amountInRightList.add(0);
+            for (Integer integer : right) {
+                if (Objects.equals(left.get(i), integer)) {
+                    amountInRightList.set(i, amountInRightList.get(i) + 1);
                 }
             }
         }
     }
 
-    public static void calc_distance(ArrayList<Integer> arr, ArrayList<Integer> arr2) {
+    private static void calcSolution() {
         int result = 0;
-        for (int i = 0; i < arr.size(); i++) {
-            if (arr.get(i) >= arr2.get(i)) {
-                result += (arr.get(i) - arr2.get(i));
-            } else {
-                result += arr2.get(i) - arr.get(i);
-            }
+        for (int i = 0; i < left.size(); i++) {
+            result += amountInRightList.get(i) * left.get(i);
         }
         System.out.print(result);
-        ;
     }
+
 }

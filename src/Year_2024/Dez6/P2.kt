@@ -1,4 +1,4 @@
-package Dez6
+package Year_2024.Dez6
 
 import java.io.BufferedReader
 import java.io.File
@@ -16,7 +16,7 @@ private var dir = 0;
 
 @Throws(IOException::class)
 private fun readFile() {
-    val file = File("/Users/gd860/IdeaProjects/AoC24/src/Dez6/P1.txt")
+    val file = File("/Users/gd860/IdeaProjects/AoC24/src/Year_2024.Dez6/P1.txt")
     BufferedReader(FileReader(file)).use { reader ->
         var line: String?
         while (reader.readLine().also { line = it } != null) {
@@ -57,6 +57,7 @@ private fun calcPath(x: Int, y: Int) {
             posY = checkPosY
             list[posX][posY] = getSymbolForDir()
         } else if (list[checkPosX][checkPosY] == '#') {
+            extendPathBack(posX, posY)
             if (dir != 3) {
                 dir++;
             } else {
@@ -84,6 +85,16 @@ private fun calcPath(x: Int, y: Int) {
             }
         }
     }
+    for (row in list) {
+        for (col in row) {
+            print(col)
+        }
+        println()
+    }
+
+    println()
+    println()
+    println()
 
     checkPosX = x;
     checkPosY = y;
@@ -94,12 +105,14 @@ private fun calcPath(x: Int, y: Int) {
         if (list[checkPosX][checkPosY] == '.' || list[checkPosX][checkPosY] == getSymbolForDir()) {
             posX = checkPosX
             posY = checkPosY
-
-            if (isLoop(posX, posY, dir)) {
-                loops++
-            }
             list[posX][posY] = getSymbolForDir()
+        } else if (list[checkPosX][checkPosY] == getNextSymbolForDir()) {
+            posX = checkPosX
+            posY = checkPosY
+            list[checkPosX][checkPosY] = 'O'
+            loops++
         } else if (list[checkPosX][checkPosY] == '#') {
+            extendPathBack(posX, posY)
             if (dir != 3) {
                 dir++;
             } else {
@@ -185,66 +198,36 @@ private fun getNextSymbolForDir(): Char {
     return 'X'
 }
 
-private fun isLoop(x: Int, y: Int, dirInput: Int): Boolean {
-
-    val recentPos: ArrayList<IntArray> = arrayListOf(
-    )
-
-
+private fun extendPathBack(x: Int, y: Int) {
     var posX = x;
     var posY = y;
 
-    var checkPosX = x;
-    var checkPosY = y;
-
-    var dir = dirInput + 1
-
-    var moved = false;
-
-    checkPosX--
-    while (isValidPos(checkPosX, checkPosY) && isRecentPos(recentPos, posX, posY)) {
-        if (list[checkPosX][checkPosY] == '.') {
-            posX = checkPosX
-            posY = checkPosY
-            val intArray = intArrayOf(posX, posY)
-            recentPos.add(intArray)
-        } else if (list[checkPosX][checkPosY] == '#') {
-            if (dir != 3) {
-                dir++;
-            } else {
-                dir = 0
-            }
-            checkPosX = posX
-            checkPosY = posY
-        }
-
+    while (true) {
         when (dir) {
             0 -> {
-                checkPosX--
+                posX++
             }
 
             1 -> {
-                checkPosY++
+                posY--
             }
 
             2 -> {
-                checkPosX++
+                posX--
             }
 
             3 -> {
-                checkPosY--
+                posY++
             }
         }
-        moved = true
-    }
-    return moved && posX == x && posY == y
-}
+        if (!isValidPos(posX, posY)) {
+            break
+        } else if (list[posX][posY] == '#') {
+            break
+        } else {
+            list[posX][posY] = getSymbolForDir()
 
-private fun isRecentPos(list: ArrayList<IntArray>, posX: Int, posY: Int): Boolean {
-    for (recent in list) {
-        if (recent[0] == posX && recent[1] == posY) {
-            return true;
         }
     }
-    return false;
+
 }

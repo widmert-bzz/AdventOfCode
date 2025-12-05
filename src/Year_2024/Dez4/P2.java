@@ -1,4 +1,4 @@
-package Dez4;
+package Year_2024.Dez4;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,7 +18,7 @@ public class P2 {
     }
 
     static void readFile() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader("/Users/gd860/IdeaProjects/AoC24/src/Dez4/P1.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("/Users/gd860/IdeaProjects/AoC24/src/Year_2024.Dez4/P1.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 list.add(line.toCharArray());
